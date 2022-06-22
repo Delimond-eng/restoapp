@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomPage extends StatelessWidget {
   final Widget child;
@@ -25,20 +26,32 @@ class CustomPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                title,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                ),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.dashboard,
+                    color: Colors.deepPurple,
+                    size: 15.0,
+                  ),
+                  const SizedBox(
+                    width: 10.0,
+                  ),
+                  Text(
+                    title,
+                    style: GoogleFonts.didactGothic(
+                      color: Colors.black,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
               ),
               if (withBtn) ...[
                 FlatButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0)),
                   color: Colors.deepPurple,
-                  onPressed: onSyncCallback,
+                  onPressed: () {},
                   padding: const EdgeInsets.all(18.0),
                   child: const Text(
                     "Synchroniser les données",
@@ -48,6 +61,12 @@ class CustomPage extends StatelessWidget {
               ]
             ],
           ),
+        ),
+        Container(
+          width: double.infinity,
+          color: Colors.deepPurple,
+          height: 0.5,
+          margin: const EdgeInsets.only(top: 10.0),
         ),
         Expanded(
           child: child,

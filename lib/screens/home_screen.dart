@@ -3,9 +3,10 @@ import 'package:dashui/helpers/navigator.dart';
 import 'package:dashui/responsive/base_widget.dart';
 import 'package:dashui/responsive/enum_screens.dart';
 import 'package:dashui/responsive/sizing_info.dart';
-import 'package:dashui/widgets/expandable_menu_item.dart';
+import 'package:dashui/widgets/sidebar_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -31,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
               return Container(
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/img_2.jpg"),
+                    image: AssetImage("assets/img_4.jpg"),
                     fit: BoxFit.cover,
                     alignment: Alignment.center,
                   ),
@@ -91,9 +92,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
           Text(
-            'Dash Ui',
-            style: TextStyle(
-              color: Colors.blue[700],
+            'Resto',
+            style: GoogleFonts.staatliches(
+              color: Colors.deepPurple,
               fontWeight: FontWeight.w900,
               fontSize: 20.0,
             ),
@@ -150,105 +151,53 @@ class Sidebar extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.grey[100].withOpacity(.9),
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                ExpandableMenuItem(
-                  icon: CupertinoIcons.home,
-                  label: "Home",
-                  childs: [
-                    MenuItem(
-                      label: "Dashboard",
-                      color: Colors.blue,
-                      onPressed: () {
+          padding: const EdgeInsets.only(top: 25.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SidebarMenuItem(
+                      icon: Icons.dashboard_sharp,
+                      itemName: "/",
+                      label: "Tableau de bord",
+                      onTap: () {
                         navigatorController.navigateTo("/");
                       },
                     ),
-                    MenuItem(
-                      label: "Personal",
-                      color: Colors.orange,
-                      onPressed: () {
-                        navigatorController.navigateTo("/personal");
+                    SidebarMenuItem(
+                      icon: Icons.shopping_basket_sharp,
+                      itemName: "/vente",
+                      label: "Ventes",
+                      onTap: () {
+                        navigatorController.navigateTo("/vente");
+                      },
+                    ),
+                    SidebarMenuItem(
+                      icon: Icons.bathroom_rounded,
+                      itemName: "/produit",
+                      label: "Produits",
+                      onTap: () {
+                        navigatorController.navigateTo("/produit");
                       },
                     ),
                   ],
                 ),
-                ExpandableMenuItem(
-                  icon: Icons.calendar_today_outlined,
-                  label: "Calendar",
-                  childs: [
-                    MenuItem(
-                      label: "Tasks",
-                      color: Colors.deepPurple,
-                      onPressed: () {},
-                    ),
-                    MenuItem(
-                      label: "Timing plans",
-                      color: Colors.blue,
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-              ],
-            ),
+              ),
+              SidebarMenuItem(
+                icon: Icons.logout,
+                itemName: "/loggedout",
+                label: "Déconnecter",
+                onTap: () {
+                  navigatorController.navigateTo("/loggedout");
+                },
+              ),
+            ],
           ),
         );
       },
-    );
-  }
-}
-
-class MenuItem extends StatelessWidget {
-  final MaterialColor color;
-  final IconData icon;
-  final String label;
-  final Function onPressed;
-  const MenuItem({
-    Key key,
-    this.color,
-    this.label,
-    this.icon,
-    this.onPressed,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 50.0,
-      decoration: const BoxDecoration(
-        color: Colors.transparent,
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: onPressed,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Icon(
-                  icon ?? Icons.arrow_right_alt_outlined,
-                  color: color ?? Colors.black,
-                  size: 18.0,
-                ),
-                const SizedBox(
-                  width: 8.0,
-                ),
-                Text(
-                  label,
-                  style: TextStyle(
-                    color: color ?? Colors.black,
-                    fontWeight: FontWeight.w500,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

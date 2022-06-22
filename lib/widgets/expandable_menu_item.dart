@@ -7,9 +7,9 @@ class ExpandableMenuItem extends StatelessWidget {
   final IconData icon;
   final String label;
   final MaterialColor color;
-  final List<Widget> childs;
+  final List<Widget> children;
   const ExpandableMenuItem(
-      {Key key, this.icon, this.label, this.color, this.childs})
+      {Key key, this.icon, this.label, this.color, this.children})
       : super(key: key);
 
   @override
@@ -78,15 +78,10 @@ class ExpandableMenuItem extends StatelessWidget {
                 ),
               ),
               collapsed: Container(),
-              expanded: Padding(
-                padding: const EdgeInsets.only(
-                  left: 8.0,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: childs,
-                ),
+              expanded: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: children,
               ),
             ),
           ],
