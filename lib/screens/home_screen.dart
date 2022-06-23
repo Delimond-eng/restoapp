@@ -3,10 +3,11 @@ import 'package:dashui/helpers/navigator.dart';
 import 'package:dashui/responsive/base_widget.dart';
 import 'package:dashui/responsive/enum_screens.dart';
 import 'package:dashui/responsive/sizing_info.dart';
+import 'package:dashui/widgets/app_logo.dart';
 import 'package:dashui/widgets/sidebar_item.dart';
+import 'package:dashui/widgets/user_session_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -61,7 +62,6 @@ class _HomeScreenState extends State<HomeScreen> {
         width: boxConstraint.maxWidth,
         height: boxConstraint.maxHeight,
         color: Colors.grey[200].withOpacity(.5),
-        padding: const EdgeInsets.all(10.0),
         child: localNavigator(),
       ),
     );
@@ -80,52 +80,15 @@ class _HomeScreenState extends State<HomeScreen> {
       iconTheme: const IconThemeData(color: Colors.black54, size: 18.0),
       elevation: 0,
       title: Row(
-        children: [
-          if (responsiveInfo.deviceScreenType == DeviceScreenType.Desktop) ...[
-            const Icon(
-              Icons.data_saver_off_rounded,
-              color: Colors.pink,
-              size: 20.0,
-            ),
-            const SizedBox(
-              width: 10.0,
-            ),
-          ],
-          Text(
-            'Resto',
-            style: GoogleFonts.staatliches(
-              color: Colors.deepPurple,
-              fontWeight: FontWeight.w900,
-              fontSize: 20.0,
-            ),
-          ),
+        children: const [
+          AppLogo(
+            size: 25.0,
+          )
         ],
       ),
       actions: [
-        IconButton(
-          icon: const Icon(CupertinoIcons.search, color: Colors.black),
-          onPressed: () {},
-        ),
-        const SizedBox(
-          width: 5.0,
-        ),
         Container(
-          height: 40.0,
-          width: 40.0,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(.2),
-                blurRadius: 10.0,
-                offset: const Offset(0, 3),
-              ),
-            ],
-          ),
-          child: const Center(
-            child: Icon(Icons.more_vert_outlined, color: Colors.black),
-          ),
+          child: const UserSessionCard(),
           margin: const EdgeInsets.only(right: 15.0),
         )
       ],
@@ -154,6 +117,17 @@ class Sidebar extends StatelessWidget {
           padding: const EdgeInsets.only(top: 25.0),
           child: Column(
             children: [
+              if (responsiveInfo.deviceScreenType !=
+                  DeviceScreenType.Desktop) ...[
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 25.0),
+                  child: Center(
+                    child: AppLogo(
+                      size: 25.0,
+                    ),
+                  ),
+                )
+              ],
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -177,10 +151,10 @@ class Sidebar extends StatelessWidget {
                     ),
                     SidebarMenuItem(
                       icon: Icons.bathroom_rounded,
-                      itemName: "/produit",
+                      itemName: "/product",
                       label: "Produits",
                       onTap: () {
-                        navigatorController.navigateTo("/produit");
+                        navigatorController.navigateTo("/product");
                       },
                     ),
                   ],

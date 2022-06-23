@@ -21,6 +21,7 @@ class NavigatorController extends GetxController {
   isHovering(String itemName) => hoverItem.value == itemName;
 
   Future<dynamic> navigateTo(String routeName) {
+    Get.back();
     if (!isActive(routeName)) changeActiveitemTo(routeName);
     return navigationKey.currentState.pushNamed(routeName);
   }

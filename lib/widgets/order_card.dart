@@ -116,14 +116,14 @@ class _OrderCardState extends State<OrderCard> {
                     children: const [
                       CustomIconBtn(
                         color: Colors.green,
-                        icon: Icons.check_rounded,
+                        icon: CupertinoIcons.checkmark_alt,
                       ),
                       SizedBox(
-                        width: 8.0,
+                        width: 5.0,
                       ),
                       CustomIconBtn(
                         color: Colors.red,
-                        icon: Icons.clear_rounded,
+                        icon: CupertinoIcons.clear,
                       )
                     ],
                   )
@@ -171,7 +171,7 @@ class _OrderCardState extends State<OrderCard> {
                   style: GoogleFonts.didactGothic(
                     color: Colors.black,
                     fontSize: 15.0,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w900,
                   ),
                 ),
                 const SizedBox(
@@ -243,7 +243,14 @@ class OrderItemCard extends StatelessWidget {
               height: 60.0,
               width: 60.0,
               decoration: const BoxDecoration(
-                  color: Colors.grey, shape: BoxShape.circle),
+                color: Colors.grey,
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  alignment: Alignment.center,
+                  image: AssetImage("assets/food.jpg"),
+                  fit: BoxFit.scaleDown,
+                ),
+              ),
               margin: const EdgeInsets.only(right: 8.0),
             ),
             Expanded(
@@ -310,22 +317,22 @@ class CustomIconBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: color, width: .5),
-        borderRadius: BorderRadius.circular(5.0),
+        color: color,
+        borderRadius: BorderRadius.circular(40.0),
       ),
       child: Material(
-        borderRadius: BorderRadius.circular(5.0),
+        borderRadius: BorderRadius.circular(40.0),
         color: Colors.transparent,
         child: InkWell(
-          borderRadius: BorderRadius.circular(5.0),
+          borderRadius: BorderRadius.circular(40.0),
           onTap: () {},
           child: Padding(
-            padding: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Icon(
                 icon,
-                color: color,
-                size: 18.0,
+                color: Colors.white,
+                size: 15.0,
               ),
             ),
           ),

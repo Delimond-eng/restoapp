@@ -4,14 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomPage extends StatelessWidget {
   final Widget child;
   final String title;
-  final bool withBtn;
+  final Widget headerChild;
   final Function onSyncCallback;
   const CustomPage({
     Key key,
     this.child,
     this.title,
-    this.withBtn = false,
     this.onSyncCallback,
+    this.headerChild,
   }) : super(key: key);
 
   @override
@@ -20,8 +20,14 @@ class CustomPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
+        const SizedBox(
+          height: 8.0,
+        ),
         Padding(
-          padding: const EdgeInsets.all(5.0),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 15.0,
+            vertical: 8.0,
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -29,7 +35,7 @@ class CustomPage extends StatelessWidget {
               Row(
                 children: [
                   const Icon(
-                    Icons.dashboard,
+                    Icons.pages,
                     color: Colors.deepPurple,
                     size: 15.0,
                   ),
@@ -46,19 +52,7 @@ class CustomPage extends StatelessWidget {
                   ),
                 ],
               ),
-              if (withBtn) ...[
-                FlatButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0)),
-                  color: Colors.deepPurple,
-                  onPressed: () {},
-                  padding: const EdgeInsets.all(18.0),
-                  child: const Text(
-                    "Synchroniser les données",
-                    style: TextStyle(color: Colors.white, fontSize: 12.0),
-                  ),
-                )
-              ]
+              if (headerChild != null) ...[headerChild]
             ],
           ),
         ),
@@ -66,7 +60,10 @@ class CustomPage extends StatelessWidget {
           width: double.infinity,
           color: Colors.deepPurple,
           height: 0.5,
-          margin: const EdgeInsets.only(top: 10.0),
+          margin: const EdgeInsets.only(
+            left: 10.0,
+            right: 10.0,
+          ),
         ),
         Expanded(
           child: child,
