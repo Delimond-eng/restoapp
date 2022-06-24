@@ -20,7 +20,7 @@ class CategoryCard extends StatelessWidget {
       decoration: isColored
           ? BoxDecoration(
               borderRadius: BorderRadius.circular(5.0),
-              color: isColored == true ? color.shade50 : Colors.transparent,
+              color: isColored == true ? Colors.white : Colors.transparent,
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(.3),

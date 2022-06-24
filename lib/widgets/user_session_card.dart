@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class UserSessionCard extends StatelessWidget {
+  final Color color;
   const UserSessionCard({
     Key key,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -26,12 +28,12 @@ class UserSessionCard extends StatelessWidget {
                     width: 25.0,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(3.0),
-                      color: Colors.deepPurple,
+                      color: color ?? Colors.deepPurple,
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Icon(
                         CupertinoIcons.person_solid,
-                        color: Colors.white,
+                        color: color != null ? Colors.deepPurple : Colors.white,
                         size: 10.0,
                       ),
                     ),
@@ -44,7 +46,7 @@ class UserSessionCard extends StatelessWidget {
                     child: Text(
                       "Gaston Delimond",
                       style: GoogleFonts.didactGothic(
-                        color: Colors.black,
+                        color: color ?? Colors.black,
                         fontSize: 18.0,
                         fontWeight: FontWeight.w400,
                       ),
@@ -55,9 +57,9 @@ class UserSessionCard extends StatelessWidget {
               const SizedBox(
                 width: 15.0,
               ),
-              const Icon(
+              Icon(
                 CupertinoIcons.chevron_down,
-                color: Colors.black,
+                color: color ?? Colors.black,
                 size: 15.0,
               )
             ],

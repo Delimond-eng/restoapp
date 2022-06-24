@@ -81,7 +81,7 @@ class _OrderCardState extends State<OrderCard> {
                         "X5 items",
                         style: GoogleFonts.didactGothic(
                           color: Colors.grey[800],
-                          fontSize: 12.0,
+                          fontSize: 13.0,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -92,19 +92,19 @@ class _OrderCardState extends State<OrderCard> {
                         text: TextSpan(
                           children: [
                             TextSpan(
-                              text: "\$ ",
-                              style: GoogleFonts.didactGothic(
-                                color: Colors.grey[800],
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            TextSpan(
-                              text: "10",
+                              text: "6550.00",
                               style: GoogleFonts.staatliches(
                                 color: Colors.black,
                                 fontWeight: FontWeight.w800,
                                 fontSize: 18.0,
+                              ),
+                            ),
+                            TextSpan(
+                              text: " CDF",
+                              style: GoogleFonts.didactGothic(
+                                color: Colors.grey[800],
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ],

@@ -76,19 +76,34 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _customAppBar(SizingInfo responsiveInfo) {
     return AppBar(
-      backgroundColor: Colors.white,
-      iconTheme: const IconThemeData(color: Colors.black54, size: 18.0),
+      backgroundColor:
+          responsiveInfo.deviceScreenType != DeviceScreenType.Desktop
+              ? Colors.deepPurple
+              : Colors.white,
+      iconTheme: IconThemeData(
+        color: responsiveInfo.deviceScreenType != DeviceScreenType.Desktop
+            ? Colors.white
+            : Colors.black54,
+        size: 18.0,
+      ),
       elevation: 0,
       title: Row(
-        children: const [
+        children: [
           AppLogo(
+            color: responsiveInfo.deviceScreenType != DeviceScreenType.Desktop
+                ? Colors.white
+                : null,
             size: 25.0,
           )
         ],
       ),
       actions: [
         Container(
-          child: const UserSessionCard(),
+          child: UserSessionCard(
+            color: responsiveInfo.deviceScreenType != DeviceScreenType.Desktop
+                ? Colors.white
+                : null,
+          ),
           margin: const EdgeInsets.only(right: 15.0),
         )
       ],

@@ -38,7 +38,7 @@ class RoundedIconBtn extends StatelessWidget {
               child: Icon(
                 icon,
                 color: Colors.white,
-                size: 15.0,
+                size: size != null ? size - 15 : 15.0,
               ),
             ),
           ),

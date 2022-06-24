@@ -4,9 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppLogo extends StatelessWidget {
   final double size;
+  final Color color;
   const AppLogo({
     Key key,
     this.size,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -30,7 +32,7 @@ class AppLogo extends StatelessWidget {
               TextSpan(
                 text: "Resto",
                 style: GoogleFonts.bungeeInline(
-                  color: Colors.deepPurple,
+                  color: color ?? Colors.deepPurple,
                   fontWeight: FontWeight.w900,
                   fontSize: size != null ? size - 5 : 35.0,
                 ),
