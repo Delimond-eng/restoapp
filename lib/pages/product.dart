@@ -4,6 +4,7 @@ import 'package:dashui/widgets/category_card.dart';
 import 'package:dashui/widgets/custom_btn.dart';
 import 'package:dashui/widgets/custom_image_picker.dart';
 import 'package:dashui/widgets/custom_page.dart';
+import 'package:dashui/widgets/filter_field.dart';
 import 'package:dashui/widgets/product_card.dart';
 import 'package:dashui/widgets/round_icon_btn.dart';
 import 'package:dashui/widgets/simple_field_text.dart';
@@ -36,50 +37,7 @@ class _ProductState extends State<Product> {
       backgroundColor: Colors.transparent,
       body: CustomPage(
         title: "Produits",
-        headerChild: Container(
-          height: 40.0,
-          width: 300.0,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5.0),
-            color: Colors.white.withOpacity(.8),
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 10.0,
-                color: Colors.grey.withOpacity(.2),
-                offset: const Offset(0, 3),
-              )
-            ],
-          ),
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Icon(
-                  CupertinoIcons.search,
-                  color: Colors.deepPurple,
-                  size: 16.0,
-                ),
-                Flexible(
-                  child: TextField(
-                    style: GoogleFonts.didactGothic(fontSize: 15.0),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.all(11.0),
-                      hintText: "Recherchez le produit...",
-                      hintStyle: GoogleFonts.didactGothic(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      border: InputBorder.none,
-                      counterText: '',
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
+        headerChild: FilterField(),
         child: LayoutBuilder(
           builder: (context, constraints) {
             return Responsive(
@@ -161,7 +119,7 @@ class _ProductState extends State<Product> {
                               CategoryCard(
                                 onPressed: () {
                                   setState(() {
-                                    _customDrawer = AddProductDrawer();
+                                    _customDrawer = const AddProductDrawer();
                                   });
                                   _scaffoldKey.currentState.openEndDrawer();
                                 },
@@ -218,7 +176,7 @@ class _ProductState extends State<Product> {
                           physics: const BouncingScrollPhysics(),
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
-                            childAspectRatio: .9,
+                            childAspectRatio: .8,
                             crossAxisCount: (responsive.deviceScreenType ==
                                     DeviceScreenType.Tablet)
                                 ? 4
@@ -265,9 +223,8 @@ class AddProductDrawer extends StatelessWidget {
       child: Container(
         height: 550.0,
         width: 500.0,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(5.0),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -276,9 +233,6 @@ class AddProductDrawer extends StatelessWidget {
             Container(
               decoration: const BoxDecoration(
                 color: Colors.deepPurple,
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(5.0),
-                ),
               ),
               width: double.infinity,
               padding: const EdgeInsets.all(6.0),
@@ -296,7 +250,7 @@ class AddProductDrawer extends StatelessWidget {
                   ),
                   RoundedIconBtn(
                     size: 30.0,
-                    color: Colors.grey,
+                    color: Colors.red,
                     icon: CupertinoIcons.clear,
                     onPressed: () {
                       Navigator.pop(context);

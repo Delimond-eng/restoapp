@@ -27,7 +27,8 @@ class SidebarMenuItem extends StatelessWidget {
       child: Obx(
         () => Container(
           margin: const EdgeInsets.only(bottom: 5.0),
-          color: navigatorController.isHovering(itemName)
+          color: (navigatorController.isHovering(itemName) ||
+                  navigatorController.isActive(itemName))
               ? color.shade50
               : Colors.transparent,
           child: Row(

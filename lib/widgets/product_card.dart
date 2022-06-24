@@ -17,6 +17,13 @@ class ProductCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(.8),
         borderRadius: BorderRadius.circular(5.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(.2),
+            blurRadius: 10.0,
+            offset: const Offset(0, 2),
+          )
+        ],
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -73,13 +80,47 @@ class ProductCard extends StatelessWidget {
                   const SizedBox(
                     height: 2.0,
                   ),
-                  Text(
-                    "Hamburger",
-                    style: GoogleFonts.didactGothic(
-                      fontSize: 12.0,
-                      fontWeight: FontWeight.w800,
-                      color: Colors.grey,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          "Hamburger",
+                          style: GoogleFonts.didactGothic(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w800,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.deepPurple[100],
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        padding: const EdgeInsets.all(4.0),
+                        child: Column(
+                          children: [
+                            Text(
+                              "STOCK",
+                              style: GoogleFonts.didactGothic(
+                                color: Colors.black,
+                                fontSize: 8.0,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                            const Text(
+                              "03",
+                              style: TextStyle(
+                                color: Colors.deepPurple,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                   const SizedBox(
                     height: 5.0,

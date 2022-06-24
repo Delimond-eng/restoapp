@@ -6,19 +6,34 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CategoryCard extends StatelessWidget {
   final Function onPressed;
+  final bool isColored;
   const CategoryCard({
     Key key,
     this.onPressed,
+    this.isColored = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var color = Colors.primaries[Random().nextInt(Colors.primaries.length)];
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5.0),
-      ),
-      margin: const EdgeInsets.only(right: 5.0),
+      decoration: isColored
+          ? BoxDecoration(
+              borderRadius: BorderRadius.circular(5.0),
+              color: isColored == true ? color.shade50 : Colors.transparent,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(.3),
+                  blurRadius: 10.0,
+                  offset: const Offset(0, 2),
+                )
+              ],
+            )
+          : BoxDecoration(
+              borderRadius: BorderRadius.circular(5.0),
+              color: isColored == true ? color.shade50 : Colors.transparent,
+            ),
+      margin: const EdgeInsets.only(right: 8.0),
       child: Material(
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(5.0),
@@ -35,10 +50,12 @@ class CategoryCard extends StatelessWidget {
                   height: 60.0,
                   width: 60.0,
                   decoration: BoxDecoration(
-                    color: color.shade100,
+                    color: color.shade300,
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: color.shade200,
+                      color: isColored == true
+                          ? Colors.transparent
+                          : color.shade300,
                       width: .8,
                     ),
                   ),

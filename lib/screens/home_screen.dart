@@ -143,10 +143,10 @@ class Sidebar extends StatelessWidget {
                     ),
                     SidebarMenuItem(
                       icon: Icons.shopping_basket_sharp,
-                      itemName: "/vente",
-                      label: "Ventes",
+                      itemName: "/sell",
+                      label: "Vendre",
                       onTap: () {
-                        navigatorController.navigateTo("/vente");
+                        navigatorController.navigateTo("/sell");
                       },
                     ),
                     SidebarMenuItem(
@@ -159,6 +159,20 @@ class Sidebar extends StatelessWidget {
                     ),
                   ],
                 ),
+              ),
+              Container(
+                height: .5,
+                width: screenSize.width,
+                color: Colors.grey,
+                margin: const EdgeInsets.all(8.0),
+              ),
+              SidebarMenuItem(
+                icon: Icons.settings,
+                itemName: "/settings",
+                label: "Paramètres",
+                onTap: () {
+                  navigatorController.navigateTo("/settings");
+                },
               ),
               SidebarMenuItem(
                 icon: Icons.logout,

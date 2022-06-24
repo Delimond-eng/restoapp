@@ -5,12 +5,10 @@ class CustomPage extends StatelessWidget {
   final Widget child;
   final String title;
   final Widget headerChild;
-  final Function onSyncCallback;
   const CustomPage({
     Key key,
     this.child,
     this.title,
-    this.onSyncCallback,
     this.headerChild,
   }) : super(key: key);
 

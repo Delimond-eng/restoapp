@@ -3,6 +3,7 @@
 import 'package:dashui/pages/dashboard.dart';
 import 'package:dashui/pages/personal.dart';
 import 'package:dashui/pages/product.dart';
+import 'package:dashui/pages/selling.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -13,6 +14,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(const Personal());
     case "/product":
       return _getPageRoute(const Product());
+    case "/sell":
+      return _getPageRoute(const Selling());
     default:
       return _getPageRoute(const DashBoard());
   }
