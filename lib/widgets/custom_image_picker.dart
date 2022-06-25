@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomImagePicker extends StatelessWidget {
+  final String hintText;
   const CustomImagePicker({
     Key key,
+    this.hintText,
   }) : super(key: key);
 
   @override
@@ -37,7 +39,7 @@ class CustomImagePicker extends StatelessWidget {
                   height: 5.0,
                 ),
                 Text(
-                  "Inserez l'image du produit",
+                  hintText,
                   style: GoogleFonts.didactGothic(
                     color: Colors.black,
                   ),

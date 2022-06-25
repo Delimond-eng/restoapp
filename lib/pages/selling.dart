@@ -71,57 +71,12 @@ class _SellingState extends State<Selling> {
                           ),
                         ],
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 10.0,
-                              color: Colors.grey.withOpacity(.3),
-                              offset: const Offset(0, 3),
-                            ),
-                          ],
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
-                        child: Material(
-                          borderRadius: BorderRadius.circular(5.0),
-                          color: Colors.transparent,
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(5.0),
-                            onTap: () {
-                              viewCategories = !viewCategories;
-                              setState(() {});
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 8.0,
-                                horizontal: 10.0,
-                              ),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    "Voir catégories",
-                                    style: GoogleFonts.didactGothic(
-                                      color: Colors.deepPurple,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15.0,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10.0,
-                                  ),
-                                  Icon(
-                                    viewCategories
-                                        ? CupertinoIcons.chevron_up
-                                        : CupertinoIcons.chevron_down,
-                                    color: Colors.black,
-                                    size: 14.0,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                      XButton(
+                        isActived: viewCategories,
+                        onPressed: () {
+                          viewCategories = !viewCategories;
+                          setState(() {});
+                        },
                       )
                     ],
                   ),
@@ -182,7 +137,10 @@ class _SellingState extends State<Selling> {
                         padding: const EdgeInsets.only(right: 10.0),
                         physics: const BouncingScrollPhysics(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio: .9,
+                          childAspectRatio: (responsive.deviceScreenType ==
+                                  DeviceScreenType.Desktop)
+                              ? .9
+                              : .8,
                           crossAxisCount: (responsive.deviceScreenType ==
                                   DeviceScreenType.Tablet)
                               ? 3
@@ -320,6 +278,69 @@ class _SellingState extends State<Selling> {
               ],
             );
           },
+        ),
+      ),
+    );
+  }
+}
+
+class XButton extends StatelessWidget {
+  final bool isActived;
+  final Function onPressed;
+  const XButton({
+    Key key,
+    this.isActived,
+    this.onPressed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 10.0,
+            color: Colors.grey.withOpacity(.3),
+            offset: const Offset(0, 3),
+          ),
+        ],
+        borderRadius: BorderRadius.circular(5.0),
+      ),
+      child: Material(
+        borderRadius: BorderRadius.circular(5.0),
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(5.0),
+          onTap: onPressed,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 8.0,
+              horizontal: 10.0,
+            ),
+            child: Row(
+              children: [
+                Text(
+                  isActived ? "Réduire catégories" : "Voir catégories",
+                  style: GoogleFonts.didactGothic(
+                    color: Colors.deepPurple,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15.0,
+                  ),
+                ),
+                const SizedBox(
+                  width: 10.0,
+                ),
+                Icon(
+                  isActived
+                      ? CupertinoIcons.chevron_up
+                      : CupertinoIcons.chevron_down,
+                  color: Colors.black,
+                  size: 14.0,
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

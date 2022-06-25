@@ -13,21 +13,10 @@ class DashCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = Colors.primaries[Random().nextInt(Colors.primaries.length)];
     return Container(
-      height: 80.0,
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5.0),
-        border: Border.all(
-          color: color.shade100,
-        ),
-        color: color.shade50,
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 10.0,
-            color: Colors.grey.withOpacity(.2),
-            offset: const Offset(0, 3),
-          )
-        ],
+        color: color.shade100,
       ),
       child: Padding(
         padding: const EdgeInsets.all(10.0),

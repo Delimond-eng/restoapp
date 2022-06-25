@@ -84,9 +84,8 @@ class _DashBoardState extends State<DashBoard> {
                       Container(
                         height: 50.0,
                         width: constraint.maxWidth,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(.3),
-                          border: const Border(
+                        decoration: const BoxDecoration(
+                          border: Border(
                             bottom:
                                 BorderSide(color: Colors.deepPurple, width: .1),
                           ),
@@ -97,25 +96,13 @@ class _DashBoardState extends State<DashBoard> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                children: [
-                                  const Icon(
-                                    Icons.restaurant_rounded,
-                                    color: Colors.deepPurple,
-                                    size: 14.0,
-                                  ),
-                                  const SizedBox(
-                                    width: 10.0,
-                                  ),
-                                  Text(
-                                    "Les commandes",
-                                    style: GoogleFonts.didactGothic(
-                                      color: Colors.black,
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                ],
+                              Text(
+                                "Les commandes (Reserves)",
+                                style: GoogleFonts.didactGothic(
+                                  color: Colors.black,
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.w700,
+                                ),
                               ),
                               Row(
                                 children: [
@@ -205,25 +192,26 @@ class StatusBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: isActive ? color.shade400 : Colors.transparent,
-        borderRadius: BorderRadius.circular(5.0),
-        border: !isActive
-            ? Border.all(color: color.shade900)
-            : Border.all(color: color.shade400),
+        color: isActive ? color.shade400 : Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(.3),
+            blurRadius: 10.0,
+            offset: const Offset(0, 3),
+          )
+        ],
       ),
       child: Material(
         color: Colors.transparent,
-        borderRadius: BorderRadius.circular(5.0),
         child: InkWell(
           onTap: onPressed,
-          borderRadius: BorderRadius.circular(5.0),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(6, 6, 10, 6),
             child: Row(
               children: [
                 Icon(
                   icon,
-                  color: isActive ? Colors.black : color.shade800,
+                  color: isActive ? Colors.white : color.shade900,
                   size: 15.0,
                 ),
                 const SizedBox(
@@ -232,9 +220,8 @@ class StatusBtn extends StatelessWidget {
                 Text(
                   label,
                   style: GoogleFonts.didactGothic(
-                    color: Colors.black,
-                    fontSize: 10.0,
-                    fontWeight: FontWeight.w400,
+                    color: isActive ? Colors.white : color.shade900,
+                    fontWeight: FontWeight.w500,
                   ),
                 )
               ],
