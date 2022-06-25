@@ -23,7 +23,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
             width: constraints.maxWidth,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/img_4.jpg"),
+                image: AssetImage("assets/bg/bg_3.jpg"),
                 alignment: Alignment.center,
                 fit: BoxFit.cover,
               ),

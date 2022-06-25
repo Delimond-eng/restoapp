@@ -1,3 +1,4 @@
+import 'package:dashui/models/produit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,9 +7,11 @@ import 'round_icon_btn.dart';
 
 class ProductCard extends StatelessWidget {
   final Function onAdded;
+  final Produit data;
   const ProductCard({
     Key key,
     this.onAdded,
+    this.data,
   }) : super(key: key);
 
   @override
@@ -34,14 +37,14 @@ class ProductCard extends StatelessWidget {
               Container(
                 height: 100.0,
                 width: double.infinity,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   image: DecorationImage(
                     alignment: Alignment.centerLeft,
                     fit: BoxFit.cover,
-                    image: AssetImage("assets/food.jpg"),
+                    image: AssetImage(data.productImage),
                   ),
                   color: Colors.grey,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomRight: Radius.circular(100.0),
                     topLeft: Radius.circular(5.0),
                     topRight: Radius.circular(5.0),
@@ -70,7 +73,7 @@ class ProductCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "CheeseBurger",
+                    data.productTitle,
                     style: GoogleFonts.didactGothic(
                       fontSize: 16.0,
                       fontWeight: FontWeight.w800,
@@ -86,7 +89,7 @@ class ProductCard extends StatelessWidget {
                     children: [
                       Flexible(
                         child: Text(
-                          "Hamburger",
+                          data.productCategory,
                           style: GoogleFonts.didactGothic(
                             fontSize: 12.0,
                             fontWeight: FontWeight.w800,
@@ -129,7 +132,7 @@ class ProductCard extends StatelessWidget {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: "1500.00 ",
+                          text: "${data.productPrice} ",
                           style: GoogleFonts.staatliches(
                             color: Colors.orange[900],
                             fontWeight: FontWeight.w800,

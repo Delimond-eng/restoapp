@@ -1,3 +1,5 @@
+import 'package:dashui/global/controllers.dart';
+import 'package:dashui/global/data.dart';
 import 'package:dashui/responsive/base_widget.dart';
 import 'package:dashui/responsive/enum_screens.dart';
 import 'package:dashui/responsive/sizing_info.dart';
@@ -5,9 +7,11 @@ import 'package:dashui/widgets/cart_item.dart';
 import 'package:dashui/widgets/category_card.dart';
 import 'package:dashui/widgets/custom_page.dart';
 import 'package:dashui/widgets/filter_field.dart';
+import 'package:dashui/widgets/outline_btn.dart';
 import 'package:dashui/widgets/sell_product_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ribbon/ribbon.dart';
 
@@ -151,11 +155,21 @@ class _SellingState extends State<Selling> {
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10.0,
                         ),
-                        itemCount: 12,
+                        itemCount: products.length,
                         itemBuilder: (context, i) {
+                          var data = products[i];
                           return SellProductCard(
-                            isActived: true,
-                            onPressed: () {},
+                            data: data,
+                            onPressed: () {
+                              data.isSelected = !data.isSelected;
+                              setState(() {});
+                              if (data.isSelected) {
+                                sellController.addItemToCart(data.productCode);
+                              } else {
+                                sellController
+                                    .removeItemFromCart(data.productCode);
+                              }
+                            },
                           );
                         },
                       ),
@@ -192,86 +206,118 @@ class _SellingState extends State<Selling> {
                         ],
                         borderRadius: BorderRadius.circular(5.0),
                       ),
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: SingleChildScrollView(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Column(
-                                children: [
-                                  for (int i = 0; i < 3; i++) ...[
-                                    const CartItem(),
-                                  ]
-                                ],
-                              ),
+                      child: Obx(() {
+                        return Column(
+                          children: [
+                            Expanded(
+                              child: sellController.cartList.isEmpty
+                                  ? Center(
+                                      child: Text(
+                                        "Veuillez sélectionner un produit pour ajouter au panier !",
+                                        style: GoogleFonts.didactGothic(
+                                          color: Colors.pink,
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    )
+                                  : SingleChildScrollView(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Column(
+                                        children: sellController.cartList
+                                            .map((data) => CartItem(data: data))
+                                            .toList(),
+                                      ),
+                                    ),
                             ),
-                          ),
-                          Container(
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                top: BorderSide(
-                                  color: Colors.black,
-                                  width: .4,
+                            Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Colors.black,
+                                    width: .4,
+                                  ),
                                 ),
                               ),
-                            ),
-                            width: double.infinity,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 15.0,
-                                vertical: 5.0,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "X3 items",
-                                        style: GoogleFonts.didactGothic(
-                                          color: Colors.grey[800],
-                                          fontSize: 14.0,
-                                          fontWeight: FontWeight.w600,
+                              width: double.infinity,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 15.0,
+                                  vertical: 5.0,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        OutlinedBtn(
+                                          color: Colors.green,
+                                          icon: CupertinoIcons
+                                              .checkmark_alt_circle_fill,
+                                          label: "Valider",
+                                          onPressed: () {},
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        height: 5.0,
-                                      ),
-                                      RichText(
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text: "6500.00",
-                                              style: GoogleFonts.staatliches(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w800,
-                                                fontSize: 18.0,
-                                              ),
-                                            ),
-                                            TextSpan(
-                                              text: "  CDF",
-                                              style: GoogleFonts.didactGothic(
-                                                color: Colors.grey[800],
-                                                fontSize: 12.0,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                          ],
+                                        const SizedBox(
+                                          width: 10.0,
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                ],
+                                        OutlinedBtn(
+                                          color: Colors.red,
+                                          icon: CupertinoIcons
+                                              .clear_circled_solid,
+                                          label: "Annuler",
+                                          onPressed: () {},
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "(x${sellController.cartList.length}) items",
+                                          style: GoogleFonts.didactGothic(
+                                            color: Colors.grey[800],
+                                            fontSize: 14.0,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 5.0,
+                                        ),
+                                        RichText(
+                                          text: TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text: "6500.00",
+                                                style: GoogleFonts.staatliches(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w800,
+                                                  fontSize: 18.0,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text: "  CDF",
+                                                style: GoogleFonts.didactGothic(
+                                                  color: Colors.grey[800],
+                                                  fontSize: 12.0,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          )
-                        ],
-                      ),
+                            )
+                          ],
+                        );
+                      }),
                     ),
                   ),
                 ),

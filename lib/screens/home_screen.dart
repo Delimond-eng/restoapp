@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
               return Container(
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/img_4.jpg"),
+                    image: AssetImage("assets/bg/bg_4.jpg"),
                     fit: BoxFit.cover,
                     alignment: Alignment.center,
                   ),

@@ -259,7 +259,7 @@ class OrderItemCard extends StatelessWidget {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   alignment: Alignment.center,
-                  image: AssetImage("assets/food.jpg"),
+                  image: AssetImage("assets/images/img_2.jpg"),
                   fit: BoxFit.scaleDown,
                 ),
               ),

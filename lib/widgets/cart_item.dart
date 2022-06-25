@@ -1,13 +1,22 @@
+import 'package:dashui/models/produit.dart';
 import 'package:dashui/widgets/round_icon_btn.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CartItem extends StatelessWidget {
+class CartItem extends StatefulWidget {
+  final Produit data;
   const CartItem({
     Key key,
+    this.data,
   }) : super(key: key);
 
+  @override
+  State<CartItem> createState() => _CartItemState();
+}
+
+class _CartItemState extends State<CartItem> {
+  int qty = 1;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,13 +38,13 @@ class CartItem extends StatelessWidget {
             Container(
               height: 80.0,
               width: 80.0,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.black,
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   alignment: Alignment.center,
                   fit: BoxFit.scaleDown,
-                  image: AssetImage("assets/food.jpg"),
+                  image: AssetImage(widget.data.productImage),
                 ),
               ),
             ),
@@ -48,7 +57,7 @@ class CartItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "CheeseBurger",
+                    widget.data.productTitle,
                     style: GoogleFonts.didactGothic(
                       fontSize: 16.0,
                       fontWeight: FontWeight.w800,
@@ -66,7 +75,7 @@ class CartItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Hamburger",
+                            widget.data.productCategory,
                             style: GoogleFonts.didactGothic(
                               fontSize: 12.0,
                               fontWeight: FontWeight.w800,
@@ -80,7 +89,7 @@ class CartItem extends StatelessWidget {
                             text: TextSpan(
                               children: [
                                 TextSpan(
-                                  text: "1500.00 ",
+                                  text: "${widget.data.productPrice} ",
                                   style: GoogleFonts.staatliches(
                                     color: Colors.orange[900],
                                     fontWeight: FontWeight.w800,
@@ -104,17 +113,22 @@ class CartItem extends StatelessWidget {
                       Row(
                         children: [
                           RoundedIconBtn(
-                            color: Colors.deepPurple,
+                            color: qty <= 1 ? Colors.grey : Colors.deepPurple,
                             icon: CupertinoIcons.minus,
                             size: 25.0,
-                            onPressed: () {},
+                            onPressed: () {
+                              if (qty > 1) {
+                                qty--;
+                                setState(() {});
+                              }
+                            },
                           ),
                           const SizedBox(
                             width: 4.0,
                           ),
-                          const Text(
-                            "1",
-                            style: TextStyle(
+                          Text(
+                            "$qty".padLeft(2, "0"),
+                            style: const TextStyle(
                               fontWeight: FontWeight.w700,
                             ),
                           ),
@@ -125,7 +139,10 @@ class CartItem extends StatelessWidget {
                             color: Colors.deepPurple,
                             icon: CupertinoIcons.add,
                             size: 25.0,
-                            onPressed: () {},
+                            onPressed: () {
+                              qty++;
+                              setState(() {});
+                            },
                           ),
                         ],
                       )

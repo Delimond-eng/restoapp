@@ -1,3 +1,4 @@
+import 'package:dashui/global/data.dart';
 import 'package:dashui/responsive/base_widget.dart';
 import 'package:dashui/responsive/enum_screens.dart';
 import 'package:dashui/widgets/category_card.dart';
@@ -189,9 +190,11 @@ class _ProductState extends State<Product> {
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10.0,
                           ),
-                          itemCount: 12,
+                          itemCount: products.length,
                           itemBuilder: (context, i) {
+                            var data = products[i];
                             return ProductCard(
+                              data: data,
                               onAdded: () {
                                 _customDrawer = const UpdateProductDrawer();
                                 setState(() {});
