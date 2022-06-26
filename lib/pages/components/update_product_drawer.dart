@@ -1,3 +1,4 @@
+import 'package:dashui/models/produit.dart';
 import 'package:dashui/widgets/custom_btn.dart';
 import 'package:dashui/widgets/simple_field_text.dart';
 import 'package:flutter/cupertino.dart';
@@ -5,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class UpdateProductDrawer extends StatelessWidget {
+  final Produit data;
   const UpdateProductDrawer({
     Key key,
+    this.data,
   }) : super(key: key);
 
   @override
@@ -35,14 +38,14 @@ class UpdateProductDrawer extends StatelessWidget {
               Container(
                 height: 112.0,
                 width: 150.0,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   image: DecorationImage(
                     alignment: Alignment.centerLeft,
                     fit: BoxFit.cover,
-                    image: AssetImage("assets/food.jpg"),
+                    image: AssetImage(data.productImage),
                   ),
                   color: Colors.grey,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomRight: Radius.circular(100.0),
                     topLeft: Radius.circular(5.0),
                     topRight: Radius.circular(5.0),
@@ -59,7 +62,7 @@ class UpdateProductDrawer extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        "CheeseBurger",
+                        data.productTitle,
                         style: GoogleFonts.didactGothic(
                           fontSize: 25.0,
                           fontWeight: FontWeight.w800,
@@ -70,7 +73,7 @@ class UpdateProductDrawer extends StatelessWidget {
                         height: 2.0,
                       ),
                       Text(
-                        "Hamburger",
+                        data.productCategory,
                         style: GoogleFonts.didactGothic(
                           fontSize: 15.0,
                           fontWeight: FontWeight.w800,

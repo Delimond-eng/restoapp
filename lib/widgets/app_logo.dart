@@ -21,7 +21,7 @@ class AppLogo extends StatelessWidget {
           "assets/svgs/food.svg",
           height: size ?? 40.0,
           width: size ?? 40.0,
-          color: Colors.deepPurple,
+          color: color ?? Colors.deepPurple,
         ),
         const SizedBox(
           width: 8.0,

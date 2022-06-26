@@ -21,6 +21,11 @@ class SellController extends GetxController {
     await initCartTotal();
   }
 
+  Future<void> removeAllFromCart() async {
+    cartList.clear();
+    await initCartTotal();
+  }
+
   Future<void> initCartTotal() async {
     var totalCount = streamCounter();
     totalCount.listen((updatedTotal) {

@@ -28,7 +28,7 @@ class AddCategoryDrawer extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Colors.orange[800],
+              color: Colors.deepPurple[900],
             ),
             width: double.infinity,
             padding: const EdgeInsets.all(6.0),

@@ -34,30 +34,123 @@ class _ProductState extends State<Product> {
       backgroundColor: Colors.transparent,
       body: CustomPage(
         title: "Produits",
-        headerChild: FilterField(),
+        headerChild: const FilterField(),
         child: LayoutBuilder(
           builder: (context, constraints) {
             return Responsive(
               builder: (context, responsive) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10.0,
-                        vertical: 15.0,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
+                return Scrollbar(
+                  isAlwaysShown: true,
+                  radius: const Radius.circular(5.0),
+                  thickness: 10,
+                  controller: vScrollController,
+                  child: SingleChildScrollView(
+                    controller: vScrollController,
+                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10.0,
+                            vertical: 15.0,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Catégories",
+                                    style: GoogleFonts.didactGothic(
+                                      fontSize: 25.0,
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 5.0,
+                                  ),
+                                  Text(
+                                    "Veuillez séléctionner une catégorie pour trouver des produits y afférent !",
+                                    style: GoogleFonts.didactGothic(
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.grey[700],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              // ignore: deprecated_member_use
+                              FlatButton.icon(
+                                color: Colors.blue,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                onPressed: () {
+                                  _customDrawer = const AddCategoryDrawer();
+                                  setState(() {});
+                                  Future.delayed(
+                                      const Duration(milliseconds: 100));
+                                  _scaffoldKey.currentState.openEndDrawer();
+                                },
+                                padding: const EdgeInsets.all(18.0),
+                                icon: const Icon(
+                                  CupertinoIcons.add,
+                                  size: 16.0,
+                                  color: Colors.white,
+                                ),
+                                label: Text(
+                                  "Nouvelle catégorie",
+                                  style: GoogleFonts.didactGothic(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Scrollbar(
+                          radius: const Radius.circular(5.0),
+                          thickness: 2.0,
+                          controller: hScrollController,
+                          child: SingleChildScrollView(
+                            controller: hScrollController,
+                            scrollDirection: Axis.horizontal,
+                            physics: const BouncingScrollPhysics(),
+                            child: Row(
+                              children: [
+                                for (int i = 0; i < 20; i++) ...[
+                                  CategoryCard(
+                                    onPressed: () {
+                                      _customDrawer = const ProductDrawer();
+                                      setState(() {});
+                                      Future.delayed(
+                                          const Duration(milliseconds: 100));
+                                      _scaffoldKey.currentState.openEndDrawer();
+                                    },
+                                  ),
+                                ]
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10.0,
+                            vertical: 15.0,
+                          ),
+                          child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Catégories",
+                                "Produits",
                                 style: GoogleFonts.didactGothic(
                                   fontSize: 25.0,
                                   fontWeight: FontWeight.w900,
@@ -68,7 +161,7 @@ class _ProductState extends State<Product> {
                                 height: 5.0,
                               ),
                               Text(
-                                "Veuillez séléctionner une catégorie pour trouver des produits y afférent !",
+                                "Les produits déjà enregistrer!",
                                 style: GoogleFonts.didactGothic(
                                   fontSize: 14.0,
                                   fontWeight: FontWeight.w400,
@@ -77,106 +170,14 @@ class _ProductState extends State<Product> {
                               ),
                             ],
                           ),
-                          // ignore: deprecated_member_use
-                          FlatButton.icon(
-                            color: Colors.blue,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5.0),
-                            ),
-                            onPressed: () {
-                              _customDrawer = const AddCategoryDrawer();
-                              setState(() {});
-                              Future.delayed(const Duration(milliseconds: 100));
-                              _scaffoldKey.currentState.openEndDrawer();
-                            },
-                            padding: const EdgeInsets.all(18.0),
-                            icon: const Icon(
-                              CupertinoIcons.add,
-                              size: 16.0,
-                              color: Colors.white,
-                            ),
-                            label: Text(
-                              "Nouvelle catégorie",
-                              style: GoogleFonts.didactGothic(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Scrollbar(
-                      radius: const Radius.circular(5.0),
-                      thickness: 2.0,
-                      controller: hScrollController,
-                      child: SingleChildScrollView(
-                        controller: hScrollController,
-                        scrollDirection: Axis.horizontal,
-                        physics: const BouncingScrollPhysics(),
-                        padding: const EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
-                        child: Row(
-                          children: [
-                            for (int i = 0; i < 20; i++) ...[
-                              CategoryCard(
-                                onPressed: () {
-                                  _customDrawer = const ProductDrawer();
-                                  setState(() {});
-                                  Future.delayed(
-                                      const Duration(milliseconds: 100));
-                                  _scaffoldKey.currentState.openEndDrawer();
-                                },
-                              ),
-                            ]
-                          ],
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10.0,
-                        vertical: 15.0,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Produits",
-                            style: GoogleFonts.didactGothic(
-                              fontSize: 25.0,
-                              fontWeight: FontWeight.w900,
-                              color: Colors.black,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 5.0,
-                          ),
-                          Text(
-                            "Les produits déjà enregistrer!",
-                            style: GoogleFonts.didactGothic(
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.grey[700],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Scrollbar(
-                        isAlwaysShown: true,
-                        radius: const Radius.circular(5.0),
-                        thickness: 5,
-                        controller: vScrollController,
-                        child: GridView.builder(
-                          controller: vScrollController,
+                        GridView.builder(
                           shrinkWrap: true,
                           padding: const EdgeInsets.symmetric(
                             horizontal: 10.0,
                             vertical: 10.0,
                           ),
-                          physics: const BouncingScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                             childAspectRatio: .8,
@@ -196,7 +197,9 @@ class _ProductState extends State<Product> {
                             return ProductCard(
                               data: data,
                               onAdded: () {
-                                _customDrawer = const UpdateProductDrawer();
+                                _customDrawer = UpdateProductDrawer(
+                                  data: data,
+                                );
                                 setState(() {});
                                 Future.delayed(
                                     const Duration(milliseconds: 100));
@@ -204,10 +207,10 @@ class _ProductState extends State<Product> {
                               },
                             );
                           },
-                        ),
-                      ),
-                    )
-                  ],
+                        )
+                      ],
+                    ),
+                  ),
                 );
               },
             );

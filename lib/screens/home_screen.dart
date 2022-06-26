@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return AppBar(
       backgroundColor:
           responsiveInfo.deviceScreenType != DeviceScreenType.Desktop
-              ? Colors.deepPurple
+              ? Colors.deepPurple[800]
               : Colors.white,
       iconTheme: IconThemeData(
         color: responsiveInfo.deviceScreenType != DeviceScreenType.Desktop
@@ -88,6 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       elevation: 0,
       title: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           AppLogo(
             color: responsiveInfo.deviceScreenType != DeviceScreenType.Desktop

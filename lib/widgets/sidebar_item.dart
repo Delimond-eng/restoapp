@@ -16,7 +16,6 @@ class SidebarMenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var color = Colors.primaries[Random().nextInt(Colors.primaries.length)];
     return InkWell(
       onTap: onTap,
       onHover: (value) {
@@ -29,7 +28,7 @@ class SidebarMenuItem extends StatelessWidget {
           margin: const EdgeInsets.only(bottom: 5.0),
           color: (navigatorController.isHovering(itemName) ||
                   navigatorController.isActive(itemName))
-              ? color.shade50
+              ? Colors.deepPurple[50]
               : Colors.transparent,
           child: Row(
             children: [
@@ -40,7 +39,7 @@ class SidebarMenuItem extends StatelessWidget {
                   width: 3,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: color.shade700,
+                    color: Colors.deepPurple[800],
                   ),
                 ),
                 maintainSize: true,
@@ -57,7 +56,7 @@ class SidebarMenuItem extends StatelessWidget {
                         icon ?? Icons.data_saver_off_rounded,
                         color: navigatorController.isHovering(itemName) ||
                                 navigatorController.isActive(itemName)
-                            ? color.shade800
+                            ? Colors.deepPurple[800]
                             : Colors.grey[900],
                         size: 18.0,
                       ),
@@ -68,7 +67,7 @@ class SidebarMenuItem extends StatelessWidget {
                           label,
                           style: GoogleFonts.didactGothic(
                             color: navigatorController.isHovering(itemName)
-                                ? color.shade900
+                                ? Colors.deepPurple[900]
                                 : Colors.grey[800],
                             fontSize: 14.0,
                           ),
@@ -79,7 +78,7 @@ class SidebarMenuItem extends StatelessWidget {
                         child: Text(
                           label,
                           style: GoogleFonts.didactGothic(
-                            color: color.shade900,
+                            color: Colors.deepPurple[900],
                             fontSize: 15.0,
                             fontWeight: FontWeight.w600,
                           ),

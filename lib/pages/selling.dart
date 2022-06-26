@@ -211,15 +211,29 @@ class _SellingState extends State<Selling> {
                           children: [
                             Expanded(
                               child: sellController.cartList.isEmpty
-                                  ? Center(
-                                      child: Text(
-                                        "Veuillez sélectionner un produit pour ajouter au panier !",
-                                        style: GoogleFonts.didactGothic(
-                                          color: Colors.pink,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.w500,
+                                  ? Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Icon(
+                                          CupertinoIcons.cart_badge_plus,
+                                          size: 45.0,
                                         ),
-                                      ),
+                                        const SizedBox(
+                                          height: 10.0,
+                                        ),
+                                        Text(
+                                          "Veuillez sélectionner un produit\npour ajouter au panier !",
+                                          textAlign: TextAlign.center,
+                                          style: GoogleFonts.didactGothic(
+                                            color: Colors.pink,
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
                                     )
                                   : SingleChildScrollView(
                                       padding: const EdgeInsets.all(10.0),
@@ -266,7 +280,16 @@ class _SellingState extends State<Selling> {
                                           icon: CupertinoIcons
                                               .clear_circled_solid,
                                           label: "Annuler",
-                                          onPressed: () {},
+                                          onPressed: () async {
+                                            await sellController
+                                                .removeAllFromCart();
+                                            for (var e in products) {
+                                              if (e.isSelected == true) {
+                                                e.isSelected = false;
+                                              }
+                                            }
+                                            setState(() {});
+                                          },
                                         ),
                                       ],
                                     ),
