@@ -291,7 +291,8 @@ class _SellingState extends State<Selling> {
                                           text: TextSpan(
                                             children: [
                                               TextSpan(
-                                                text: "6500.00",
+                                                text:
+                                                    "${sellController.cartTotal.value}",
                                                 style: GoogleFonts.staatliches(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w800,

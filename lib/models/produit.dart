@@ -4,7 +4,7 @@ class Produit {
   String productCategory;
   String productImage;
   double productPrice;
-  int productQty;
+  int productQty = 1;
   bool isSelected = false;
 
   double get total => productPrice * productQty;
@@ -15,6 +15,5 @@ class Produit {
     this.productImage,
     this.productCategory,
     this.productPrice,
-    this.productQty = 1,
   });
 }

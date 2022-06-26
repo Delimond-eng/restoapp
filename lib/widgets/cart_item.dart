@@ -1,3 +1,4 @@
+import 'package:dashui/global/controllers.dart';
 import 'package:dashui/models/produit.dart';
 import 'package:dashui/widgets/round_icon_btn.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,7 +17,6 @@ class CartItem extends StatefulWidget {
 }
 
 class _CartItemState extends State<CartItem> {
-  int qty = 1;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -113,13 +113,16 @@ class _CartItemState extends State<CartItem> {
                       Row(
                         children: [
                           RoundedIconBtn(
-                            color: qty <= 1 ? Colors.grey : Colors.deepPurple,
+                            color: widget.data.productQty <= 1
+                                ? Colors.grey
+                                : Colors.deepPurple,
                             icon: CupertinoIcons.minus,
                             size: 25.0,
-                            onPressed: () {
-                              if (qty > 1) {
-                                qty--;
+                            onPressed: () async {
+                              if (widget.data.productQty > 1) {
+                                widget.data.productQty--;
                                 setState(() {});
+                                await sellController.initCartTotal();
                               }
                             },
                           ),
@@ -127,7 +130,7 @@ class _CartItemState extends State<CartItem> {
                             width: 4.0,
                           ),
                           Text(
-                            "$qty".padLeft(2, "0"),
+                            "${widget.data.productQty}".padLeft(2, "0"),
                             style: const TextStyle(
                               fontWeight: FontWeight.w700,
                             ),
@@ -139,9 +142,10 @@ class _CartItemState extends State<CartItem> {
                             color: Colors.deepPurple,
                             icon: CupertinoIcons.add,
                             size: 25.0,
-                            onPressed: () {
-                              qty++;
+                            onPressed: () async {
+                              widget.data.productQty++;
                               setState(() {});
+                              await sellController.initCartTotal();
                             },
                           ),
                         ],
